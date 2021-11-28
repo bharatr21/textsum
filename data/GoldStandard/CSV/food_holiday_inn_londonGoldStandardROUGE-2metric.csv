@@ -1,0 +1,7 @@
+Article: food_holiday_inn_london
+Metric: ROUGE-2
+food_holiday_inn_london ROUGE-2,1,2,3,4
+1,1.0,0.0,0.0,0.0
+2,0.0,1.0,0.0,0.0
+3,0.0,0.0,1.0,0.0
+4,0.0,0.0,0.0,1.0

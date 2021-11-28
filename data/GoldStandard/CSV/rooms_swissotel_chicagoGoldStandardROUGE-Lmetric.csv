@@ -1,0 +1,7 @@
+Article: rooms_swissotel_chicago
+Metric: ROUGE-L
+rooms_swissotel_chicago ROUGE-L,1,2,3,4
+1,1.0,0.364,0.25,0.286
+2,0.364,1.0,0.364,0.444
+3,0.25,0.364,1.0,0.429
+4,0.286,0.444,0.429,1.0

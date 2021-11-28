@@ -1,0 +1,8 @@
+Article: staff_bestwestern_hotel_sfo
+Metric: ROUGE-2
+staff_bestwestern_hotel_sfo ROUGE-2,1,2,3,4,5
+1,1.0,0.0,0.0,0.667,0.0
+2,0.0,1.0,0.0,0.0,0.0
+3,0.0,0.0,1.0,0.0,0.182
+4,0.667,0.0,0.0,1.0,0.0
+5,0.0,0.0,0.182,0.0,1.0

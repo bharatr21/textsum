@@ -1,0 +1,7 @@
+Article: screen_ipod_nano_8gb
+Metric: ROUGE-L
+screen_ipod_nano_8gb ROUGE-L,1,2,3,4
+1,1.0,0.333,0.235,0.143
+2,0.333,1.0,0.353,0.286
+3,0.235,0.353,1.0,0.211
+4,0.143,0.286,0.211,1.0

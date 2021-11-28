@@ -1,0 +1,7 @@
+Article: performance_honda_accord_2008
+Metric: ROUGE-1
+performance_honda_accord_2008 ROUGE-1,1,2,3,4
+1,1.0,0.095,0.231,0.083
+2,0.095,1.0,0.364,0.222
+3,0.231,0.364,1.0,0.286
+4,0.083,0.222,0.286,1.0

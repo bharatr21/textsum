@@ -1,0 +1,7 @@
+Article: room_holiday_inn_london
+Metric: ROUGE-1
+room_holiday_inn_london ROUGE-1,1,2,3,4
+1,1.0,0.235,0.0,0.316
+2,0.235,1.0,0.308,0.1
+3,0.0,0.308,1.0,0.0
+4,0.316,0.1,0.0,1.0

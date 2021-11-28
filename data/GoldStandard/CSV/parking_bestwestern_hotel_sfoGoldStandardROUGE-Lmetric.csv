@@ -1,0 +1,7 @@
+Article: parking_bestwestern_hotel_sfo
+Metric: ROUGE-L
+parking_bestwestern_hotel_sfo ROUGE-L,1,2,3,4
+1,1.0,0.25,0.4,0.207
+2,0.25,1.0,0.111,0.216
+3,0.4,0.111,1.0,0.194
+4,0.207,0.216,0.194,1.0

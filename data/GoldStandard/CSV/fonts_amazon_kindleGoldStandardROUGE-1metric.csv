@@ -1,0 +1,7 @@
+Article: fonts_amazon_kindle
+Metric: ROUGE-1
+fonts_amazon_kindle ROUGE-1,1,2,3,4
+1,1.0,0.24,0.276,0.16
+2,0.24,1.0,0.625,0.333
+3,0.276,0.625,1.0,0.25
+4,0.16,0.333,0.25,1.0
