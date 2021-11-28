@@ -1,0 +1,7 @@
+Article: quality_toyota_camry_2007
+Metric: ROUGE-1
+quality_toyota_camry_2007 ROUGE-1,1,2,3,4
+1,1.0,0.125,0.125,0.2
+2,0.125,1.0,1.0,0.2
+3,0.125,1.0,1.0,0.2
+4,0.2,0.2,0.2,1.0

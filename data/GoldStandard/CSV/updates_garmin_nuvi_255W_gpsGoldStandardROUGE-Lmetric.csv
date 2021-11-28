@@ -1,0 +1,6 @@
+Article: updates_garmin_nuvi_255W_gps
+Metric: ROUGE-L
+updates_garmin_nuvi_255W_gps ROUGE-L,1,2,3
+1,1.0,0.138,0.2
+2,0.138,1.0,0.211
+3,0.2,0.211,1.0

@@ -1,0 +1,8 @@
+Article: location_bestwestern_hotel_sfo
+Metric: ROUGE-L
+location_bestwestern_hotel_sfo ROUGE-L,1,2,3,4,5
+1,1.0,0.0,0.118,0.087,0.25
+2,0.0,1.0,0.1,0.222,0.111
+3,0.118,0.1,1.0,0.353,0.077
+4,0.087,0.222,0.353,1.0,0.133
+5,0.25,0.111,0.077,0.133,1.0
