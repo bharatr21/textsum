@@ -19,7 +19,6 @@ Exploring Text Summarization Techniques
 - [Middle](#middle)
 
 [Results](#results)
-[References](#references)
 
 ## Introduction
 **Text Summarization** is the task of generating a short and concise summary that captures the main ideas of the source text. There are two main approaches to text summarization:
@@ -40,7 +39,7 @@ We use the `sumeval` package which implements this method.
 
 An  alternative implementation of the metric which uses precision, recall and F-measures provided by the `rouge` package in Python is as follows:
 
-Precision <!-- $P_n = \frac{Count_{overlap}{(n-grams\ in\ Candidate\  and \ Reference\ Summaries)}}{Count{(n-grams\ in\ Candidate\ Summary)}}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?P_n%20%3D%20%5Cfrac%7BCount_%7Boverlap%7D%7B(n-grams%5C%20in%5C%20Candidate%5C%20%20and%20%5C%20Reference%5C%20Summaries)%7D%7D%7BCount%7B(n-grams%5C%20in%5C%20Candidate%5C%20Summary)%7D%7D">
+Precision <!-- $P_n = \frac{Count_{overlap}{(n-grams\ in\ Candidate\  and \ Reference\ Summaries)}}{Count{(n-grams\ in\ Candidate\ Summary)}}$ --> <img style="transform: translateY(0.3em); background: white;" src="https://latex.codecogs.com/svg.latex?P_n%20%3D%20%5Cfrac%7BCount_%7Boverlap%7D%7B(n-grams%5C%20in%5C%20Candidate%5C%20%20and%20%5C%20Reference%5C%20Summaries)%7D%7D%7BCount%7B(n-grams%5C%20in%5C%20Candidate%5C%20Summary)%7D%7D">
 
 Recall <!-- $R_n  = \frac{Count_{overlap}{(n-grams\ in\ Candidate\  and \  Reference\ Summaries)}}{Count{(n-grams\ in\ Reference\ Summary)}}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?R_n%20%20%3D%20%5Cfrac%7BCount_%7Boverlap%7D%7B(n-grams%5C%20in%5C%20Candidate%5C%20%20and%20%5C%20%20Reference%5C%20Summaries)%7D%7D%7BCount%7B(n-grams%5C%20in%5C%20Reference%5C%20Summary)%7D%7D">
 
@@ -106,3 +105,79 @@ Here, the  similarity score between two sentences <!-- $x$ --> <img style="trans
 This is an example of a weighted-cosine similarity graph generated for a cluster where <!-- $d_is_j$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?d_is_j"> represents document i, sentence j.
 
 ### BigramRank
+We proposed a new algorithm BigramRank as a new **graph based model** which considers the basic lexical unit as bigrams (two consecutive tokens/words). This considers the frequency of bigrams (two consecutive words) and assigns the sentence relevance score for a sentence <!-- $S$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?S"> as:
+Sentence Relevance Score of S is given as:
+ <!-- $Score(S) = \frac{\sum_{Bigrams \in S}Bigrams}{\sum_{Bigrams \in Document}Bigrams}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?Score(S)%20%3D%20%5Cfrac%7B%5Csum_%7BBigrams%20%5Cin%20S%7DBigrams%7D%7B%5Csum_%7BBigrams%20%5Cin%20Document%7DBigrams%7D">
+ 
+![BigramRank](assets/BigramRank.png)
+This is the graph generated for the sentences “Windows 7 is a bit faster. Windows 7 is a little faster.” The bigram (Windows, 7) occurs 2 times, (little, faster) occurs 1 time.
+#### Ends
+The bigrams at the beginning and end of the sentence are considered slightly more important than bigrams occurring at the middle of a sentence, under the assumption that human readers may just **skim through the beginning and end of a large sentence** to look for the meaning of what the sentence conveys. To do this, the existing bigram frequency weights are multiplied elementwise by a **kernel**, which is <!-- $[1...0...1]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5B1...0...1%5D"> which has weights decreasing from <!-- $[1, 0]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5B1%2C%200%5D"> gradually in steps of <!-- $\frac{2}{(length\ of\ sentence-1)}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5Cfrac%7B2%7D%7B(length%5C%20of%5C%20sentence-1)%7D">  (where the weight is 0 at the exact middle bigram of the sentence, which means the middle/median bigram is not relevant to the sentence) and then increases from <!-- $[0, 1]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5B0%2C%201%5D">, again in steps of  <!-- $\frac{2}{(length\ of\ sentence-1)}$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5Cfrac%7B2%7D%7B(length%5C%20of%5C%20sentence-1)%7D">
+Eg: - Kernel of length 5 is <!-- $[1,0.5,0,0.5,1]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5B1%2C0.5%2C0%2C0.5%2C1%5D">, length 4 is <!-- $[1,0,0,1]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5B1%2C0%2C0%2C1%5D">, length 9 is <!-- $[1,0.75,0.5,0.25,0,0.25,0.5,0.75,1]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5B1%2C0.75%2C0.5%2C0.25%2C0%2C0.25%2C0.5%2C0.75%2C1%5D">
+#### Middle
+This assumes the opposite, that is, when humans read a sentence, they may tend to **skip to the middle part of a sentence to get information and the beginning is full of transition words/conjunctions.** In this case, the rest of the algorithm remains same and the **kernel gets flipped**, that is, first an increase from $[0, 1]$ in steps of $\frac{2}{(length\ of\ sentence - 1)}$ and then a decrease from $[1, 0]$ with the same step.
+
+Eg: - Kernel of length 5 is <!-- $[0,0.5,1,0.5,0]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5B0%2C0.5%2C1%2C0.5%2C0%5D">, length 4 is <!-- $[0,1,1,0]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5B0%2C1%2C1%2C0%5D">, length 9 is <!-- $[0,0.25,0.5,0.75,1,0.75,0.5,0.25,0]$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?%5B0%2C0.25%2C0.5%2C0.75%2C1%2C0.75%2C0.5%2C0.25%2C0%5D">
+
+This is based on <!-- $ Number\ of\ bigrams = Length\ of\ sentence - 1$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?Number%5C%20of%5C%20bigrams%20%3D%20Length%5C%20of%5C%20sentence%20-%201">
+
+### Results
+The metrics were measured in two ways, each with both the [`sumeval`](https://pypi.org/project/sumeval/) and [`rouge`](https://pypi.org/project/rouge/) packages for each document and then averaged over all documents.
+1) The average ROUGE scores with all the available gold standard summaries were taken (on-average performance) for each document.
+2) The maximum ROUGE score of the available gold summaries (of a document) was taken to be the ROUGE score (for that document) (max performance). 
+
+##### Maximum Performance, Rouge Package
+| **Algorithm**       | **ROUGE-1** | **ROUGE-2** | **ROUGE-L** |
+| ------------------- | ----------- | ----------- | ----------- |
+| Centroid (TFIDF)    | 0.149       | 0.025       | 0.087       |
+| Luhn                | 0.172       | 0.040       | 0.106       |
+| LSA                 | 0.192       | 0.034       | 0.131       |
+| LexRank             | 0.265       | 0.080       | 0.196       |
+| TextRank            | 0.308       | 0.099       | 0.251       |
+| BigramRank          | 0.328       | 0.134       | 0.292       |
+| BigramRank (Ends)   | **0.338**   | **0.140**   | **0.303**   |
+| BigramRank (Middle) | 0.301       | 0.100       | 0.255       |
+
+![MaxRouge](assets/MaxRougeresults.png)
+
+##### Average Performance, Rouge Package
+| **Algorithm**       | **ROUGE-1** | **ROUGE-2** | **ROUGE-L** |
+| ------------------- | ----------- | ----------- | ----------- |
+| Centroid (TFIDF)    | 0.104       | 0.011       | 0.058       |
+| Luhn                | 0.119       | 0.018       | 0.068       |
+| LSA                 | 0.134       | 0.016       | 0.086       |
+| LexRank             | 0.186       | 0.037       | 0.127       |
+| TextRank            | 0.213       | 0.042       | 0.166       |
+| BigramRank          | **0.227**   | 0.060       | 0.191       |
+| BigramRank (Ends)   | 0.224       | **0.064**   | 0.193       |
+| BigramRank (Middle) | 0.219       | 0.042       | **0.205**   |
+
+![AverageRouge](assets/AverageRougeresults.png)
+
+##### Maximum Performance, SumEval Package
+| **Algorithm**       | **ROUGE-1** | **ROUGE-2** | **ROUGE-L** |
+| ------------------- | ----------- | ----------- | ----------- |
+| Centroid (TFIDF)    | 0.135       | 0.026       | 0.112       |
+| Luhn                | 0.156       | 0.043       | 0.133       |
+| LSA                 | 0.202       | 0.049       | 0.179       |
+| LexRank             | 0.290       | 0.104       | 0.257       |
+| TextRank            | **0.373**   | 0.122       | 0.335       |
+| BigramRank          | 0.356       | 0.122       | 0.335       |
+| BigramRank (Ends)   | 0.354       | **0.128**   | **0.337**   |
+| BigramRank (Middle) | 0.317       | 0.096       | 0.297       |
+
+![MaxSumEval](assets/Maxsumevalresults.png)
+
+##### Average Performance, SumEval Package
+| **Algorithm**       | **ROUGE-1** | **ROUGE-2** | **ROUGE-L** |
+| ------------------- | ----------- | ----------- | ----------- |
+| Centroid (TFIDF)    | 0.089       | 0.011       | 0.073       |
+| Luhn                | 0.105       | 0.019       | 0.092       |
+| LSA                 | 0.138       | 0.020       | 0.122       |
+| LexRank             | 0.189       | 0.038       | 0.166       |
+| TextRank            | **0.248**   | **0.053**   | **0.229**   |
+| BigramRank          | 0.241       | 0.051       | 0.228       |
+| BigramRank (Ends)   | 0.235       | 0.052       | 0.222       |
+| BigramRank (Middle) | 0.219       | 0.042       | 0.205       |
+
+![AverageSumEval](assets/Averagesumevalresults.png)
