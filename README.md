@@ -138,7 +138,7 @@ Eg: - Kernel of length 5 is <!-- $[0,0.5,1,0.5,0]$ --> <img style="transform: tr
 
 This is based on <!-- $ Number\ of\ bigrams = Length\ of\ sentence - 1$ --> <img style="transform: translateY(0.1em); background: white;" src="https://latex.codecogs.com/svg.latex?Number%5C%20of%5C%20bigrams%20%3D%20Length%5C%20of%5C%20sentence%20-%201">
 
-### Results
+## Results
 The metrics were measured in two ways, each with both the [`sumeval`](https://pypi.org/project/sumeval/) and [`rouge`](https://pypi.org/project/rouge/) packages for each document and then averaged over all documents.
 1) The average ROUGE scores with all the available gold standard summaries were taken (on-average performance) for each document.
 2) The maximum ROUGE score of the available gold summaries (of a document) was taken to be the ROUGE score (for that document) (max performance). 
@@ -199,5 +199,5 @@ The metrics were measured in two ways, each with both the [`sumeval`](https://py
 
 ![AverageSumEval](assets/Averagesumevalresults.png)
 
-### Deep Learning
+## Deep Learning
 Coming soon!
