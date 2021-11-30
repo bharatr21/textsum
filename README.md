@@ -20,6 +20,8 @@ Exploring Text Summarization Techniques
 
 [Results](#results)
 
+[Deep Learning](#deep-learning)
+
 ## Introduction
 **Text Summarization** is the task of generating a short and concise summary that captures the main ideas of the source text. There are two main approaches to text summarization:
 ### Abstractive Summarization
@@ -196,3 +198,6 @@ The metrics were measured in two ways, each with both the [`sumeval`](https://py
 | BigramRank (Middle) | 0.219       | 0.042       | 0.205       |
 
 ![AverageSumEval](assets/Averagesumevalresults.png)
+
+### Deep Learning
+Coming soon!
