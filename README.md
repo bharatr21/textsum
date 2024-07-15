@@ -68,7 +68,7 @@ For term $i$ in document $j$,
 
 $$w_{i,j} = tf_{i,j} \times \log (\frac{N}{df_{i}})$$ 
 
-where $tf_{i,j} = $ number of occurrences of term $i$ in $j$,
+where $tf_{i,j} = \text{number of occurrences of term } i \text{ in } j $,
 
 $df_{i,j}$ the number of documents that contain $i$,
 
@@ -77,7 +77,7 @@ $N =$ the total number of documents in the corpus.
 ### Luhn
 This method can be extended to use abstracts/excerpts instead of complete sentences and works as follows:
 - First identify the sentence which consists of the cluster containing the maximum number of **significant** words. (This can be determined by another frequency based algorithm such as TF-IDF or thresholding)
-- Significance of Sentence $$ = \frac{[Count( significant\ words\ in\ sentence)]^2}{Count(words\ in\ sentence)}$$
+- Significance of Sentence = $\frac{[Count( significant\ words\ in\ sentence)]^2}{Count(words\ in\ sentence)}$
 
 ![Luhn](assets/Luhn.png)
 
