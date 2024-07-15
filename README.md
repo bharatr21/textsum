@@ -157,7 +157,7 @@ This assumes the opposite, that is, when humans read a sentence, they may tend t
 
 Eg: - Kernel of length 5 is $[0,0.5,1,0.5,0]$, length 4 is $[0,1,1,0]$, length 9 is $[0,0.25,0.5,0.75,1,0.75,0.5,0.25,0]$
 
-This is based on the fact that $$ Number\ of\ bigrams = Length\ of\ sentence - 1$$
+This is based on the fact that the $number\ of\ bigrams = length\ of\ sentence - 1$
 
 ## Results
 The metrics were measured in two ways, each with both the [`sumeval`](https://pypi.org/project/sumeval/) and [`rouge`](https://pypi.org/project/rouge/) packages for each document and then averaged over all documents.
@@ -219,6 +219,3 @@ The metrics were measured in two ways, each with both the [`sumeval`](https://py
 | BigramRank (Middle) | 0.219       | 0.042       | 0.205       |
 
 ![AverageSumEval](assets/Averagesumevalresults.png)
-
-## Deep Learning Methods (BERT, RoBERTa etc.)
-Coming soon!
